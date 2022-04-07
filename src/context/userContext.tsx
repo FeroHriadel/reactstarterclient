@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getUserAndToken } from '../actions/userActions';
 
 
 
@@ -10,7 +11,7 @@ export type UserDetails = {
 
 type UserState = {
   user: UserDetails | null;
-  token: string;
+  token: string | undefined;
 }
 
 type UserContextObj = {
@@ -45,6 +46,14 @@ const UserContextProvider: React.FC = (props) => {
     login: loginHandler,
     logout: logoutHandler
   }
+
+  useEffect(() => {
+    const userWithToken = getUserAndToken();
+    if (userWithToken) {
+      // delete userWithToken.token;    //actually, I want the token in the state
+      setUser(userWithToken);
+    }
+  }, [])
 
   return <UserContext.Provider value={contextValue}>
     {props.children}

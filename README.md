@@ -10,7 +10,10 @@ A starter template that gives you some features that almost all apps have so you
 1. git clone https://github.com/FeroHriadel/reactstarterclient.git
 2. npm install
 3. npm start (will start dev. server on localhost:3000)
-4. create .env file in the root with the following variables: ...(COMPLETE LATER)
+4. create .env file in the root with the following variables:
+- REACT_APP_DOMAIN=http://localhost:3000
+- REACT_APP_API=http://localhost:5000/api
+ ...(COMPLETE LATER)
 5. You will also need to clone the server-side code: https://github.com/FeroHriadel/reactstarterserver.git
 
 ## Technologies:

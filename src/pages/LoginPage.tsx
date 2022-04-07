@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import EmailPasswordForm, { formValues } from '../components/forms/EmailPasswordForm';
 import { Link } from 'react-router-dom';
 import { checkEmail } from '../helpers/checkEmail';
 import { Alert, Spinner } from 'react-bootstrap';
+import RedirectLoggedUsers from '../components/RedirectLoggedUsers';
+import { UserContext } from '../context/userContext';
+import { signin, saveUserAndToken } from '../actions/userActions';
 
 
 
 
 const LoginPage: React.FC = () => {
     //VALUES
+    const { login } = useContext(UserContext);
     const [values, setValues] = useState<formValues>({email: '', password: ''});
     const [message, setMessage] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
@@ -37,6 +41,8 @@ const LoginPage: React.FC = () => {
     //RENDER
     return (
         <div className='container'>
+            <RedirectLoggedUsers />
+
             <h1 className='text-center my-5'>Login</h1>
 
             <div className='row mb-5'>

@@ -3,14 +3,15 @@ import { UserDetails } from '../context/userContext'; //UserDetails model import
 
 
 
-//////////////////HELPERS (get and set user in LS and token in cookies)
+
+//HELPERS (get and set user in LS and token in cookies)
   //set cookie
 export const setCookie = (key: string, value: string) => {
     cookie.set(key, value);
 }
 
  //get cookie
-export const getCookie = (key: string) => {
+export const getCookie: (key: string) => string | undefined = (key) => {
     return cookie.get(key);
 }
 
@@ -32,18 +33,21 @@ export const removeUserAndToken = () => {
 }
 
   //get user from LS & token from cookies
-export const getUserAndToken = () => {
+export const getUserAndToken: () => {user: {email: string; _id: string; role: string}, token: string | undefined} | undefined = () => {
     const isCookie = getCookie('token');
     if (isCookie) {
         if (localStorage.getItem('user')) {
-            return {user: {...JSON.parse(localStorage.getItem('user')!), token: isCookie}}
+            return {
+                user: {...JSON.parse(localStorage.getItem('user')!)},
+                token: getCookie('token')
+            }
         }
-    } else return false;
+    } else return undefined;
 }
 
 
 
-///////////////////API CALLS:
+//API CALLS:
 //
 //SIGNUP
 interface EmailPasswordValues {
@@ -61,6 +65,25 @@ export const signup = (values: EmailPasswordValues) => {
     })
     .then(res => {
         return res.json();
+    })
+    .catch(error => {
+        return {error: 'Something went wrong (action)'}
+    })
+}
+
+
+
+//SIGNIN
+export const signin = (values: EmailPasswordValues) => {
+    return fetch(`${process.env.REACT_APP_API}/users/signin`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+    })
+    .then(res => {
+        return res.json()
     })
     .catch(error => {
         return {error: 'Something went wrong (action)'}
