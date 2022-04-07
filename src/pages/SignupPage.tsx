@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import EmailPasswordForm, { formValues } from '../components/forms/EmailPasswordForm';
 import { Link } from 'react-router-dom';
 import { checkEmail } from '../helpers/checkEmail';
 import { Alert, Spinner } from 'react-bootstrap';
-import { signup } from '../actions/userActions';
+import { signup, saveUserAndToken } from '../actions/userActions';
+import { UserContext } from '../context/userContext';
+import RedirectLoggedUsers from '../components/RedirectLoggedUsers';
 
 
 
@@ -13,6 +15,7 @@ const SignupPage: React.FC = () => {
   const [message, setMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const { email, password } = values;
+  const { user, login } = useContext(UserContext);
 
 
 
@@ -34,7 +37,9 @@ const SignupPage: React.FC = () => {
           if (data && data.error) {
             setMessage(data.error);
           } else {
-            setMessage('Thank you for signing up. Redirecting...')
+            saveUserAndToken(data.user, data.token); //save {user} in LS, token in cookies
+            login({user: data.user, token: data.token}); //dispatch to userContext
+            setMessage('Thank you for signing up. Redirecting...');
             setLoading(true); //nothing is loading but I need to hide the submit button
           }
         })
@@ -46,6 +51,8 @@ const SignupPage: React.FC = () => {
   //RENDER
   return (
     <div className='container'>
+      <RedirectLoggedUsers />
+
       <h1 className='text-center my-5'>Sign up</h1>
 
       <div className='row mb-3'>

@@ -1,0 +1,2 @@
+- Move types to e.g.: src/types/types.ts (they are strewn all over now)
+- src/actions/userActions > signup   => return is not typed (I dunno how)
