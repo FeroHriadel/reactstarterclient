@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserAndToken } from '../actions/userActions';
+import { getUserAndToken, removeCookie } from '../actions/userActions';
 
 
 
@@ -39,6 +39,7 @@ const UserContextProvider: React.FC = (props) => {
 
   const logoutHandler = () => {
     setUser(null);
+    removeCookie('token');
   }
 
   const contextValue: UserContextObj = {

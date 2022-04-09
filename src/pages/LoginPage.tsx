@@ -32,8 +32,18 @@ const LoginPage: React.FC = () => {
         if (!checkEmail(email)) return setMessage('Please, enter a valid email');
 
         setLoading(true);
-        
-        console.log(values);
+        signin(values)
+            .then(data => {
+                setLoading(false);
+                if (data && data.error) {
+                    setMessage(data.error);
+                } else {
+                    saveUserAndToken(data.user, data.token); //save {user} in LS, token in cookies
+                    login({user: data.user, token: data.token}); //dispatch to userContext
+                    setMessage('You are in!. Redirecting...');
+                    setLoading(true); //nothing is loading but I need to hide the submit button
+                }
+            })
     }
 
 
@@ -62,7 +72,11 @@ const LoginPage: React.FC = () => {
             {
                 message
                 &&
-                <Alert variant='primary' className='text-center'>{message}</Alert>
+                <div className='row'>
+                    <div className='text-center col-md-6 offset-md-3'>
+                        <Alert variant='primary' className='text-center'>{message}</Alert>
+                    </div>
+                </div>
             }
 
             <div className='text-center'>
