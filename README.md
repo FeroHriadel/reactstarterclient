@@ -1,10 +1,18 @@
+# !!!!!!!!!!!!!!!!!!!!!!!!!
+# THIS APP IS JUST BEING BUILT
+## It might take a week or three to finish
+# !!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 # REACT STARTER TEMPLATE (CLIENT)
 
 ## What is this?
-A starter template that gives you some features that almost all apps have so you can save time coding.
+A starter template with features almost all apps need so you can save time coding.
 
 ## Features
-- Auth (Sign in/up/out; ProtectedRoutes, AdminRoutes, Admin Pannel)
+- Auth: Sign in/up/out; ProtectedRoutes, AdminRoutes, Admin Panel
+- Items: generic items that can be modified as needed (e.g.: items to posts, blogs, products, to-dos, whatever...), CRUD, items support image upload, each item has one category and multiple tags => items can be searched y these
+- 
 
 ## How to run
 1. git clone https://github.com/FeroHriadel/reactstarterclient.git
@@ -21,3 +29,5 @@ A starter template that gives you some features that almost all apps have so you
 - Jest, React-Testing-Library
 - SASS
 - Bootstrap
+- React Context
+- Redux Toolkit (I know, why Redux & Context together?... so you have a template to copy from)

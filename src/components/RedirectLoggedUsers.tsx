@@ -6,7 +6,7 @@ import { UserContext } from '../context/userContext';
 
 const RedirectLoggedUsers: React.FC = () => {
     //VALUES
-    const { user, login, logout } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
 
