@@ -89,3 +89,21 @@ export const signin = (values: EmailPasswordValues) => {
         return {error: 'Something went wrong (action)'}
     })
 }
+
+
+
+//GET LOGGED-IN USER INFO
+export const getLoggedInUser = (token: string) => {
+    return fetch(`${process.env.REACT_APP_API}/users/getuser`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(res => {
+        return res.json();
+    })
+    .catch(error => {
+        return {error: 'Something went wrong (action)'}
+    })
+}

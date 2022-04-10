@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../context/userContext';
@@ -13,13 +13,20 @@ const MainNav: React.FC = () => {
 
 
 
+  //PREVENT PAGE RELOAD WHEN BOOTSTRAP LINKS GET CLICKED
+    //I will never ever ever use Bootstrap NavBar template again. You need the 'href' in <Nav.Link> for SEO, but you don't want to reload page on click. You cannot just remove the href and wrap it in <Link> because that would result in 2 <a>s wrapped inside each other. Never never never using Bootstrap Navbar template again. Not to mention the hooves you have to jump thru trying to move the links to the right.
+  const preventReload = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      const elementHref = (e.currentTarget.attributes[0].value)
+      navigate(elementHref);
+  }
+
+
+
   //LOGOUT
   const logoutHandler = () => {
     logout();
   }
-
-
-  //LOGGED-IN USER WATCHER
 
 
 
@@ -35,15 +42,21 @@ const MainNav: React.FC = () => {
 
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
+                    
+                    <Nav.Link onClick={preventReload} href="/">Home</Nav.Link>
+                    
+                    <Nav.Link onClick={preventReload} href="/admin">Admin</Nav.Link>
+                    
+                    {
+                        user && user.user && user.user.email
+                        &&
+                        <NavDropdown title="My Account" id="basic-nav-dropdown">
+                            <NavDropdown.Item onClick={preventReload} href="/userdetails">My details</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item onClick={logoutHandler}>Log out</NavDropdown.Item>
+                        </NavDropdown>
+                    }
+                    
                     {
                         user && user.user
                         ?
