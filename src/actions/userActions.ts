@@ -67,6 +67,7 @@ export const signup = (values: EmailPasswordValues) => {
         return res.json();
     })
     .catch(error => {
+        console.log(error);
         return {error: 'Something went wrong (action)'}
     })
 }
@@ -86,6 +87,7 @@ export const signin = (values: EmailPasswordValues) => {
         return res.json()
     })
     .catch(error => {
+        console.log(error);
         return {error: 'Something went wrong (action)'}
     })
 }
@@ -104,6 +106,7 @@ export const getLoggedInUser = (token: string) => {
         return res.json();
     })
     .catch(error => {
+        console.log(error);
         return {error: 'Something went wrong (action)'}
     })
 }

@@ -31,3 +31,15 @@ A starter template with features almost all apps need so you can save time codin
 - Bootstrap
 - React Context
 - Redux Toolkit (I know, why Redux & Context together?... so you have a template to copy from)
+
+
+## Templates:
+The code style is varied in order to cover more use cases (you might want to be more consistent in a real project)
+
+### Redux Template:
+- redux toolkit setup: /src/store.ts & /src/slices/categoriesSlice.ts
+- dispatch from component template: /src/slices/categoriesSlice.ts, /src/actions/categoryActions > createCategory, /src/pages/AdminCategoriesPage.tsx
+
+### Router Template:
+- Protected Route: /src/components/ProtectedRoute.tsx, /src/App.tsx
+- Nested Routes: /src/components/App.tsx
