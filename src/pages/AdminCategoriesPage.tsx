@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { UserContext } from '../context/userContext';
 import { Button, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,6 +6,7 @@ import { addCategory } from '../slices/categoriesSlice';
 import TitleDescriptionForm from '../components/forms/TitleDescriptionForm';
 import { RootState } from '../store';
 import { createCategory } from '../actions/categoryActions';
+import CategoriesList from '../components/lists/CategoriesList';
 
 
 
@@ -25,7 +26,8 @@ const AdminCategoriesPage = () => {
   const { title } = values;
   const [message, setMessage] = useState('');
   const { user } = useContext(UserContext);
-  
+  const endOfList = useRef<HTMLDivElement>(null);
+
 
 
   //ADD CATEGORY HANDLERS
@@ -46,7 +48,10 @@ const AdminCategoriesPage = () => {
         } else {
           setMessage('Category created');
           dispatch(addCategory(data.category));
-          setTimeout(() => {setMessage('')}, 1000);
+          setTimeout(() => {
+            setMessage(''); 
+            endOfList.current!.scrollIntoView();
+          }, 750);
         }
       })
   }
@@ -84,15 +89,8 @@ const AdminCategoriesPage = () => {
         <div className='row my-5 all-categories-section'>
           <h4 className='text-center'>Categories - List</h4>
           <div className='col-md-6 offset-md-3'>
-            {
-              categories && categories.length === 0
-              ?
-              <p className='text-center'>No categories found</p>
-              :
-              categories.map(category => (
-                <p key={category._id}>{category.title}</p>
-              ))
-            }
+            <CategoriesList />
+            <div className='end-of-list' ref={endOfList} />
           </div>
         </div>      
     </div>

@@ -8,13 +8,12 @@ import MainNav from './MainNav';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
-import CategoriesPage from '../pages/CategoriesPage';
-import ItemsPage from '../pages/ItemsPage';
 import ProtectedRoute from './ProtectedRoute';
 import UserdetailsPage from '../pages/UserdetailsPage';
 import AdminRoute from './AdminRoute';
 import AdminIndexPage from '../pages/AdminIndexPage';
 import AdminCategoriesPage from '../pages/AdminCategoriesPage';
+import CategoryPage from '../pages/CategoryPage';
 
 
 
@@ -38,8 +37,10 @@ function App() {
             <Route path='/admin/categories' element={<AdminCategoriesPage />} />
           </Route>
 
-          <Route path='/categories' element={<CategoriesPage />} />
-          <Route path='/items' element={<ItemsPage />} />
+          <Route path='/categories/:slug' element={<AdminRoute />}>
+            <Route path='/categories/:slug' element={<CategoryPage />} />
+          </Route>
+
         </Routes>
       </BrowserRouter>
     </UserContextProvider>
