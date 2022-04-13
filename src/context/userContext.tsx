@@ -32,6 +32,7 @@ export const UserContext = React.createContext<UserContextObj>({
 
 const UserContextProvider: React.FC = (props) => {
   const [user, setUser] = useState<UserState | null>(null);
+  //const [user, setUser] = useState<UserState | null>({user: {email: 'fh@gmail.com', _id: '2nkond3nj', role: 'admin'}, token: 'aijoi3jnjono'});
 
   const loginHandler = (userDetails: UserState) => {
     setUser(userDetails);

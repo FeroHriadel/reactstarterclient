@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import UserContextProvider from '../context/userContext';
 
 import '../styles/bootstrap.min.css';
+import '../styles/index.scss';
 
 import MainNav from './MainNav';
 import HomePage from '../pages/HomePage';

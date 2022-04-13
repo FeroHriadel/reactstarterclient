@@ -17,7 +17,6 @@ const initialState: CategoriesState = [];
 
 
 
-
 export const categoriesSlice = createSlice({
     name: 'categories',
     initialState,

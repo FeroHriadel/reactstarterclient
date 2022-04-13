@@ -5,6 +5,7 @@ import { RootState } from '../../store';
 import { getCategories } from '../../slices/categoriesSlice';
 import { ListGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { FaEdit } from 'react-icons/fa';
 
 
 
@@ -44,18 +45,21 @@ const CategoriesList = () => {
             <p className='text-center'>No categories found</p>
             :
             <ListGroup>
-              <ListGroup.Item className='text-center'>
+              <ListGroup.Item>
                 <small className='text-muted'>Click category to view/edit</small>
               </ListGroup.Item>
               {
                 categories.map(category => (
                 <ListGroup.Item 
                   key={category._id} 
-                  className='text-center' 
+                   
                   style={{cursor: 'pointer'}}
                   onClick={() => navigate(`/categories/${category.slug}`)}
                 >
-                  {category.title}
+                  <div className='d-flex w-100 justify-content-between'>
+                    <p style={{margin: 0, padding: 0}}>{category.title}</p>
+                    <FaEdit />
+                  </div>
                 </ListGroup.Item>
                 ))
               }

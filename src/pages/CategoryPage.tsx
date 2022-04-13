@@ -6,6 +6,7 @@ import TitleDescriptionForm from '../components/forms/TitleDescriptionForm';
 import { updateCategory } from '../actions/categoryActions';
 import { updateCategories } from '../slices/categoriesSlice';
 import { useDispatch } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
 
 
@@ -49,13 +50,16 @@ const CategoryPage = () => {
     e.preventDefault();
     if (title.trim() === '') return setMessage('Title is required');
     
+    setFormShown(false);
     setMessage('Updating category...');
     updateCategory(title, description, _id, user!.token!)
       .then(data => {
         if (data && data.error) {
           setMessage(data.error);
+          setFormShown(true)
         } else {
           setMessage('Category Updated');
+          setFormShown(true);
           setTimeout(() => {setMessage('')}, 1000);
           dispatch(updateCategories(values));
         }
@@ -67,7 +71,7 @@ const CategoryPage = () => {
 
   //RENDER
   return (
-    <div className='container'>
+    <div className='container mb-5'>
       <h1 className='text-center my-5'>Edit/Delete Category</h1>
 
       {
@@ -85,6 +89,17 @@ const CategoryPage = () => {
         && 
         <p className='my-5 text-center'>{message}</p>
       }
+
+      <div className='row mt-1'>
+        <div className='col-md-6 offset-md-3'>
+          <Button variant='danger' className='col-12 mb-1'>
+            Delete Category
+          </Button>
+          <Button variant='secondary' className='col-12 mb-1' onClick={() => navigate(-1)}>
+            Go Back
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }
