@@ -30,11 +30,14 @@ export const categoriesSlice = createSlice({
         updateCategories: (state, action: PayloadAction<CategoryItem>) => {
             const idx = state.findIndex(item => item._id === action.payload._id);
             state = state.splice(idx, 1, action.payload);
+        },
+        removeCategory: (state, action: PayloadAction<string>) => {
+            return state.filter(category => category._id !== action.payload);
         }
     }
 });
 
-export const { addCategory, getCategories, updateCategories } = categoriesSlice.actions;
+export const { addCategory, getCategories, updateCategories, removeCategory } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
 
 
