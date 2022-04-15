@@ -11,10 +11,12 @@ import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
 import ProtectedRoute from './ProtectedRoute';
 import UserdetailsPage from '../pages/UserdetailsPage';
+
 import AdminRoute from './AdminRoute';
 import AdminIndexPage from '../pages/AdminIndexPage';
 import AdminCategoriesPage from '../pages/AdminCategoriesPage';
-import CategoryPage from '../pages/CategoryPage';
+import CategoryPage from '../pages/AdminCategoryPage';
+import AdminTagsPage from '../pages/AdminTagsPage';
 
 
 
@@ -36,10 +38,8 @@ function App() {
           <Route path='/admin' element={<AdminRoute />}>
             <Route path='/admin' element={<AdminIndexPage />} />
             <Route path='/admin/categories' element={<AdminCategoriesPage />} />
-          </Route>
-
-          <Route path='/categories/:slug' element={<AdminRoute />}>
-            <Route path='/categories/:slug' element={<CategoryPage />} />
+            <Route path='/admin/categories/:slug' element={<CategoryPage />} />
+            <Route path='/admin/tags' element={<AdminTagsPage />} />
           </Route>
 
         </Routes>

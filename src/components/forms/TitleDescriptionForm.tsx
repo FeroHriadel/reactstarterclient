@@ -16,7 +16,7 @@ const TitleDescriptionForm: React.FC<{values: AddCategoryFormValues; handleChang
                 </Form.Text>
                 <Form.Control 
                     type="text" 
-                    placeholder="Category name" 
+                    placeholder="Name" 
                     maxLength={30} 
                     name='title' 
                     value={values.title} onChange={handleChange} 

@@ -54,7 +54,7 @@ const CategoriesList = () => {
                   key={category._id} 
                    
                   style={{cursor: 'pointer'}}
-                  onClick={() => navigate(`/categories/${category.slug}`)}
+                  onClick={() => navigate(`/admin/categories/${category.slug}`)}
                 >
                   <div className='d-flex w-100 justify-content-between'>
                     <p style={{margin: 0, padding: 0}}>{category.title}</p>
