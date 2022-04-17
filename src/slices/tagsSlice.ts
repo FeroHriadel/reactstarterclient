@@ -16,10 +16,13 @@ export const tagsSlice = createSlice({
         addTag: (state, action: PayloadAction<TagItem>) => {
             state.push(action.payload);
         },
+        getTags: (state, action: PayloadAction<TagItem[]>) => {
+            return state = [...action.payload];
+        }
     }
 });
 
-export const { addTag } = tagsSlice.actions;
+export const { addTag, getTags } = tagsSlice.actions;
 export default tagsSlice.reducer;
 
 

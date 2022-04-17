@@ -3,7 +3,7 @@ import { AddCategoryFormValues } from '../pages/AdminCategoriesPage';
 import { CategoryItem } from '../slices/categoriesSlice';
 
 //action imports
-import { addTag } from '../slices/tagsSlice';
+import { addTag, getTags } from '../slices/tagsSlice';
 import { changeMessage } from '../slices/messageSlice';
 
 
@@ -37,4 +37,24 @@ export const createTag = (values: AddTagFormValues, token: string) => async (dis
     dispatch(addTag(data.tag));
     dispatch(changeMessage('Tag added'));
     setTimeout(() => {dispatch(changeMessage(''))}, 1000);
-} 
+}
+
+
+
+export const fetchTags = () => async (dispatch: any) => {
+    dispatch(changeMessage('Getting tags...'));
+
+    const res = await fetch(`${process.env.REACT_APP_API}/tags/gettags`);
+    const data = await res.json();
+    if (data && data.error) {
+        console.log(data.error);
+        dispatch(changeMessage(data.error));
+        setTimeout(() => {
+            dispatch(changeMessage(''));
+        }, 1000);
+        return;
+    }
+
+    dispatch(getTags(data.tags));
+    dispatch(changeMessage(''));
+}

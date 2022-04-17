@@ -7,6 +7,7 @@ import { changeMessage } from '../slices/messageSlice';
 import { AddCategoryFormValues } from './AdminCategoriesPage';
 import { RootState } from '../store';
 import TitleDescriptionForm from '../components/forms/TitleDescriptionForm';
+import TagsList from '../components/lists/TagsList';
 
 
 
@@ -27,21 +28,25 @@ const AdminTagsPage = () => {
 
 
 
-    //ADD TAG HANDLERS
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeMessage(''));
-        setValues({...values, [e.target.name]: e.target.value})
+  //ADD TAG HANDLERS
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(changeMessage(''));
+      setValues({...values, [e.target.name]: e.target.value})
+    }
+  
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (title.trim() === '') {
+          dispatch(changeMessage('Title is required'));
+          return;
       }
-    
-      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (title.trim() === '') {
-            dispatch(changeMessage('Title is required'));
-            return;
-        }
-        
-        dispatch(createTag(values, user!.token!));
-      }
+      
+      dispatch(createTag(values, user!.token!));
+      setTimeout(() => {
+        endOfList.current!.scrollIntoView();
+      }, 750)
+    }
+
 
 
   //RENDER
@@ -73,9 +78,9 @@ const AdminTagsPage = () => {
         </div>
 
         <div className='row my-5 all-categories-section'>
-          <h4 className='text-center'>Categories - List</h4>
+          <h4 className='text-center'>Tags - List</h4>
           <div className='col-md-6 offset-md-3'>
-            {/* <TagsList /> */}
+            <TagsList />
             <div className='end-of-list' ref={endOfList} />
           </div>
         </div>      
