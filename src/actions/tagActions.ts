@@ -3,7 +3,7 @@ import { AddCategoryFormValues } from '../pages/AdminCategoriesPage';
 import { CategoryItem } from '../slices/categoriesSlice';
 
 //action imports
-import { addTag, getTags } from '../slices/tagsSlice';
+import { addTag, getTags, updateTags } from '../slices/tagsSlice';
 import { changeMessage } from '../slices/messageSlice';
 
 
@@ -57,4 +57,45 @@ export const fetchTags = () => async (dispatch: any) => {
 
     dispatch(getTags(data.tags));
     dispatch(changeMessage(''));
+}
+
+
+
+export const getTagBySlug = (slug: string) => {
+    return fetch(`${process.env.REACT_APP_API}/tags/gettag/${slug}`)
+        .then(res => {
+            return res.json();
+        })
+        .catch(error => {
+            console.log(error);
+            return {error: 'Something went wrong (action)'}
+        })
+}
+
+
+
+export const updateTag = (title: string, description: string, _id: string, token: string) => async (dispatch: any) => {
+    dispatch(changeMessage('Updating Tag...'));
+
+    const res = await fetch(`${process.env.REACT_APP_API}/tags/updatetag`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({title, description, _id})
+    });
+
+    const data = await res.json();
+    if (data && data.error) {
+        dispatch(changeMessage(data.error));
+        setTimeout(() => {
+            dispatch(changeMessage(''));
+        }, 1000);
+        return;
+    }
+
+    dispatch(updateTags(data.tag));
+    dispatch(changeMessage('Tag updated'));
+    setTimeout(() => {dispatch(changeMessage(''))}, 1000);
 }

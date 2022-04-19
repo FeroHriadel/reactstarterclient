@@ -18,11 +18,15 @@ export const tagsSlice = createSlice({
         },
         getTags: (state, action: PayloadAction<TagItem[]>) => {
             return state = [...action.payload];
-        }
+        },
+        updateTags: (state, action: PayloadAction<TagItem>) => {
+            const idx = state.findIndex(item => item._id === action.payload._id);
+            state = state.splice(idx, 1, action.payload);
+        },
     }
 });
 
-export const { addTag, getTags } = tagsSlice.actions;
+export const { addTag, getTags, updateTags } = tagsSlice.actions;
 export default tagsSlice.reducer;
 
 

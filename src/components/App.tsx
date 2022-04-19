@@ -17,6 +17,7 @@ import AdminIndexPage from '../pages/AdminIndexPage';
 import AdminCategoriesPage from '../pages/AdminCategoriesPage';
 import CategoryPage from '../pages/AdminCategoryPage';
 import AdminTagsPage from '../pages/AdminTagsPage';
+import AdminTagPage from '../pages/AdminTagPage';
 
 
 
@@ -40,6 +41,7 @@ function App() {
             <Route path='/admin/categories' element={<AdminCategoriesPage />} />
             <Route path='/admin/categories/:slug' element={<CategoryPage />} />
             <Route path='/admin/tags' element={<AdminTagsPage />} />
+            <Route path='/admin/tags/:slug' element={<AdminTagPage />} />
           </Route>
 
         </Routes>

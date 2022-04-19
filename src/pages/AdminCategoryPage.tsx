@@ -106,7 +106,7 @@ const CategoryPage = () => {
       <h1 className='text-center my-5'>Edit/Delete Category</h1>
 
       {
-        values.title && formShown
+        values._id && formShown
         &&
         <div className='row'>
           <div className='col-md-6 offset-md-3'>
