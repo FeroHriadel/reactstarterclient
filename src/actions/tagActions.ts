@@ -3,7 +3,7 @@ import { AddCategoryFormValues } from '../pages/AdminCategoriesPage';
 import { CategoryItem } from '../slices/categoriesSlice';
 
 //action imports
-import { addTag, getTags, updateTags } from '../slices/tagsSlice';
+import { addTag, getTags, updateTags, removeTag } from '../slices/tagsSlice';
 import { changeMessage } from '../slices/messageSlice';
 
 
@@ -98,4 +98,27 @@ export const updateTag = (title: string, description: string, _id: string, token
     dispatch(updateTags(data.tag));
     dispatch(changeMessage('Tag updated'));
     setTimeout(() => {dispatch(changeMessage(''))}, 1000);
+}
+
+
+
+export const deleteTag = (tagId: string, token: string) => async (dispatch: any) => {
+    dispatch(changeMessage('Deleting Tag...')); //watch out! AdminCategoryPage depends on the exact wording of this message!
+
+    const res = await fetch(`${process.env.REACT_APP_API}/tags/deletetag/${tagId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    
+    const data = await res.json();
+
+    if (data && data.error) {
+        dispatch(changeMessage(data.error)); 
+        return;
+    }
+
+    dispatch(removeTag(tagId));
+    dispatch(changeMessage('Tag deleted. Redirecting...')); //watch out! AdminCategoryPage depends on the exact wording of this message! Which I know is totally retarded but it was not my idea to put `dispatch` into tagActions. I am only adapting to stupid requirements.
 }

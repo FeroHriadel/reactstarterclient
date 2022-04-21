@@ -23,10 +23,13 @@ export const tagsSlice = createSlice({
             const idx = state.findIndex(item => item._id === action.payload._id);
             state = state.splice(idx, 1, action.payload);
         },
+        removeTag: (state, action: PayloadAction<string>) => {
+            return state.filter(tag => tag._id !== action.payload);
+        }
     }
 });
 
-export const { addTag, getTags, updateTags } = tagsSlice.actions;
+export const { addTag, getTags, updateTags, removeTag } = tagsSlice.actions;
 export default tagsSlice.reducer;
 
 

@@ -8,8 +8,18 @@ import { getTagBySlug } from '../actions/tagActions';
 import TitleDescriptionForm from '../components/forms/TitleDescriptionForm';
 import { Button } from 'react-bootstrap';
 import ConfirmModal from '../components/modals/ConfirmModal';
-import { updateTag } from '../actions/tagActions';
+import { updateTag, deleteTag } from '../actions/tagActions';
 
+
+
+/*
+  The requirement was to code this page using redux `dispatch` inside tagActions (which also make API call)
+  whereby I lost a lot of control over displaying messages to the user
+  It's a retarded solution and I won't do a stupidity like that again.
+  Anyway, the upshot is that in the //DELETE TAG section below there is a useEffect that heavily relies on
+  the exact wording of the redux.message. Careful if you decide to change the message in tagActions > deleteTag.
+  I also added a cmment next to those messages.
+*/
 
 
 const AdminTagPage = () => {
@@ -44,21 +54,42 @@ const AdminTagPage = () => {
 
 
 
-    //EDIT CATEGORY HANDLERS
-    //change handler
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeMessage(''));
-        setValues({...values, [e.target.name]: e.target.value})
-      }
+  //EDIT CATEGORY HANDLERS
+  //change handler
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(changeMessage(''));
+      setValues({...values, [e.target.name]: e.target.value})
+    }
+  
+    //submit handler
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (title.trim() === '') return dispatch(changeMessage('Title is required'));
     
-        //submit handler
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (title.trim() === '') return dispatch(changeMessage('Title is required'));
-        
-        setFormShown(false);
-        dispatch(updateTag(title, description, _id, user!.token!));
-      }
+    setFormShown(false);
+    dispatch(updateTag(title, description, _id, user!.token!));
+  }
+
+
+
+  //DELETE TAG
+  useEffect(() => {
+    if (actionConfirmed) {
+      dispatch(deleteTag(values._id, user!.token!));
+    }
+  }, [actionConfirmed, values, user]);
+
+    //show/hide form during deleting process
+  useEffect(() => {
+    if (message === 'Deleting Tag...') setFormShown(false);
+    if (message === 'Tag deleted. Redirecting...') {
+      setTimeout(() => {
+        dispatch(changeMessage(''));
+        navigate(-1);
+      }, 1000);
+    }
+    
+  }, [message])
 
 
 
