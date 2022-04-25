@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import ExpandingCards from '../components/webcomponents/ExpandingCards';
 
 
 
 const HomePage: React.FC = () => {
     //VARIABLES
     const navigate = useNavigate();
+    const [cardsBg, setCardsBg3] = useState('transparent')
 
 
 
     //RENDER
     return (
         <div className='home-page'>
+            <div className='webcomponent-wrapper' style={{width: '100%', height: '200px'}}>
+                <ExpandingCards cardsBg={cardsBg} />
+            </div>
+
             <div className='container'>
                 <h1 className='my-5 text-center'>HomePage</h1>
 
