@@ -1,43 +1,40 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addItem } from '../slices/itemsSlice';
-import { RootState } from '../store';
+import React, { useContext } from 'react';
+import { Button } from 'react-bootstrap';
+import { UserContext } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
-const ItemsPage: React.FC = () => {
+
+
+export interface Item {
+    category: string,
+    tags: string[],
+    title: string,
+    description: string
+}
+
+
+
+const ItemsPage = () => {
   //VALUES
-  const items = useSelector((state: RootState )=> state.items);
-  const dispatch = useDispatch();
-  const [input, setInput] = useState('');
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+  
 
 
-
-  const handleSubmit = () => {
-      dispatch(addItem(input));
-      setInput('');
-  }
-
-
-
+  //RENDER
   return (
     <div className='container'>
-        <h1 className='text-center my-5'>Items</h1>
+        <h1 className="my-5 text-center">ITEMS PAGE</h1>
 
         {
-            items.value.map(item => (
-                <p>{item}</p>
-            ))
+            user && user.token
+            &&
+            <div className="row">
+                <div className='col-md-6 offset-md-3'>
+                    <Button className="col-12" variant='dark' onClick={() => navigate('/items/additem')}>Add Item</Button>
+                </div>
+            </div>
         }
-
-        <input
-            type='text'
-            value={input}
-            name='input'
-            onChange={(e) => setInput(e.target.value)}
-        />
-        <button onClick={handleSubmit}>
-            Submit
-        </button>
-
 
     </div>
   )

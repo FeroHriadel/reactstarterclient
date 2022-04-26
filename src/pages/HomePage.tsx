@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import ExpandingCards from '../components/webcomponents/ExpandingCards';
 
 
 
@@ -15,10 +14,7 @@ const HomePage: React.FC = () => {
     //RENDER
     return (
         <div className='home-page'>
-            <div className='webcomponent-wrapper' style={{width: '100%', height: '200px'}}>
-                <ExpandingCards cardsBg={cardsBg} />
-            </div>
-
+            
             <div className='container'>
                 <h1 className='my-5 text-center'>HomePage</h1>
 
@@ -28,6 +24,7 @@ const HomePage: React.FC = () => {
                         <Button variant="primary" className='col-12 m-1' onClick={() => navigate('/admin')}>Admin</Button>
                         <Button variant="primary" className='col-12 m-1' onClick={() => navigate('/categories')}>Categories</Button>
                         <Button variant="primary" className='col-12 m-1' onClick={() => navigate('/items')}>Items</Button>
+                        <Button variant="primary" className='col-12 m-1' onClick={() => navigate('/webcomponent')}>WebComponent</Button>
                     </div>
                 </div>
             </div>
