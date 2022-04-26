@@ -17,7 +17,14 @@ const ItemForm: React.FC<{
   //RENDER
   return (
     <Form>
-        <CategoriesSelect />
+        <p className="text-muted text-center">
+          <small>Fields marked * are required</small>
+      </p>
+
+        <div className="form-group mb-3">
+          <label htmlFor="category">*Category</label>
+          <CategoriesSelect />
+        </div>
     </Form>
   )
 }

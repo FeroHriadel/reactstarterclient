@@ -58,7 +58,6 @@ const CategoriesSelect: React.FC = () => {
                         <option key={c._id} value={c._id}>{c.title}</option>
                     ))
                 }
-                
             </Form.Select>
         }
     </div>
