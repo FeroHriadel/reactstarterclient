@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { fetchTags } from '../../actions/tagActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { getTags } from '../../slices/tagsSlice';
 import { ListGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';

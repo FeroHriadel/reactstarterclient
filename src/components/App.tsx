@@ -26,7 +26,9 @@ function App() {
   return (
     <UserContextProvider>
       <BrowserRouter>
+      
         <MainNav />
+
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage />} />

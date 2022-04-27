@@ -18,7 +18,7 @@ import { updateTag, deleteTag } from '../actions/tagActions';
   It's a retarded solution and I won't do a stupidity like that again.
   Anyway, the upshot is that in the //DELETE TAG section below there is a useEffect that heavily relies on
   the exact wording of the redux.message. Careful if you decide to change the message in tagActions > deleteTag.
-  I also added a cmment next to those messages.
+  I also added a comment next to those messages in tagActions.
 */
 
 

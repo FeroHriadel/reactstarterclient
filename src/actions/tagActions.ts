@@ -55,6 +55,12 @@ export const fetchTags = () => async (dispatch: any) => {
         return;
     }
 
+    if (data && data.tags.length === 0) {
+        dispatch(changeMessage('No tags found'));
+        dispatch(changeMessage(''));
+        return;
+    }
+
     dispatch(getTags(data.tags));
     dispatch(changeMessage(''));
 }

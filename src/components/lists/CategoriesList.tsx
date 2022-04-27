@@ -26,6 +26,7 @@ const CategoriesList = () => {
           .then(data => {
               if (data && data.error) {
                     setMessage('Loading categories failed');
+                    setTimeout(() => setMessage(''), 2000);
               } else {
                   setMessage('');
                   dispatch(getCategories(data.categories));
