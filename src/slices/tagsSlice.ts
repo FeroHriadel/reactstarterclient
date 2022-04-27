@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CategoryItem } from './categoriesSlice';
+import { TagItem } from '../models/models';
 
 
 
-type TagItem = CategoryItem;
 type TagsState = TagItem[];
 const initialState: TagsState = [];
 

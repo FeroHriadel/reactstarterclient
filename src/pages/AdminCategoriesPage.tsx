@@ -7,13 +7,7 @@ import TitleDescriptionForm from '../components/forms/TitleDescriptionForm';
 import { RootState } from '../store';
 import { createCategory } from '../actions/categoryActions';
 import CategoriesList from '../components/lists/CategoriesList';
-
-
-
-export type AddCategoryFormValues = {
-  title: string;
-  description: string;
-}
+import { AddCategoryFormValues } from '../models/models';
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { AddCategoryFormValues } from '../../pages/AdminCategoriesPage';
+import { AddCategoryFormValues } from '../../models/models';
 
 
 

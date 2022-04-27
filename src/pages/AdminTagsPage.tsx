@@ -4,15 +4,10 @@ import { Button, Alert } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTag } from '../actions/tagActions';
 import { changeMessage } from '../slices/messageSlice';
-import { AddCategoryFormValues } from './AdminCategoriesPage';
+import { AddTagFormValues } from '../models/models';
 import { RootState } from '../store';
 import TitleDescriptionForm from '../components/forms/TitleDescriptionForm';
 import TagsList from '../components/lists/TagsList';
-
-
-
-
-type AddTagFormValues = AddCategoryFormValues;
 
 
 

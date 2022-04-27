@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Item } from '../../pages/ItemsPage';
-import CategoriesSelect from './CategoriesSelect';
+import CategoriesSelect from './formcomponents/CategoriesSelect';
+import TagsSelect from './formcomponents/TagsSelect';
 
 
 
@@ -11,6 +12,7 @@ const ItemForm: React.FC<{
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }> = ({values, handleChange, handleSubmit}) => {
   //VALUES
+  //...no values yet
 
 
 
@@ -24,6 +26,11 @@ const ItemForm: React.FC<{
         <div className="form-group mb-3">
           <label htmlFor="category">*Category</label>
           <CategoriesSelect />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Tags</label>
+          <TagsSelect />
         </div>
     </Form>
   )

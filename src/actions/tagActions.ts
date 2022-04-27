@@ -1,16 +1,12 @@
 //type imports
-import { AddCategoryFormValues } from '../pages/AdminCategoriesPage';
-import { CategoryItem } from '../slices/categoriesSlice';
+import { AddTagFormValues } from '../models/models';
+import { TagItem } from '../models/models';
 
 //action imports
 import { addTag, getTags, updateTags, removeTag } from '../slices/tagsSlice';
 import { changeMessage } from '../slices/messageSlice';
 
 
-
-//categories and tags have the same data {title, description...} but I dont want to confuse other peope by asigning tag: CategoryItem. That's why I declared TagItem here:
-type AddTagFormValues = AddCategoryFormValues;
-type TagItem = CategoryItem;
 
 
 

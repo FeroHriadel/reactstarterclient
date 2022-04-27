@@ -1,4 +1,4 @@
-import { AddCategoryFormValues } from '../pages/AdminCategoriesPage';
+import { AddCategoryFormValues } from '../models/models';
 
 
 

@@ -1,15 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CategoryItem } from '../models/models';
 
 
 
-export type CategoryItem = {
-    title: string;
-    slug: string;
-    description: string;
-    _id: string;
-    createdAt: string;
-    updatedAt: string;
-}
 
 type CategoriesState = CategoryItem[];
 

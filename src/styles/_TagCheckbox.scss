@@ -1,0 +1,27 @@
+@use 'variables';
+
+.tag-checkbox {
+    border-radius: 50%;
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    min-height: 50px;
+    background: variables.$bg-medium-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+    margin: 0.5rem;
+    cursor: pointer;
+
+    & > * {
+        text-align: center;
+        font-size: 0.6rem;
+        color: variables.$text-light-color;
+        line-height: 0.65rem;
+        margin: 0;
+        padding: 0;
+        transform: rotate(-30deg);
+        pointer-events: none;
+    }
+}

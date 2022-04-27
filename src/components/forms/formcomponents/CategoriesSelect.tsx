@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCategories } from '../../slices/categoriesSlice';
-import { fetchCategories } from '../../actions/categoryActions';
-import { RootState } from '../../store';
+import { getCategories } from '../../../slices/categoriesSlice';
+import { fetchCategories } from '../../../actions/categoryActions';
+import { RootState } from '../../../store';
 
 
 
 
 const CategoriesSelect: React.FC = () => {
   //VALUES
-    const dispatch = useDispatch();
-    const categories = useSelector((state: RootState )=> state.categories);
-    const [message, setMessage] = useState('');
+  const dispatch = useDispatch();
+  const categories = useSelector((state: RootState )=> state.categories);
+  const [message, setMessage] = useState('');
 
 
 
