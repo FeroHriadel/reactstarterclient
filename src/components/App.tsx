@@ -19,6 +19,13 @@ import CategoryPage from '../pages/AdminCategoryPage';
 import AdminTagsPage from '../pages/AdminTagsPage';
 import AdminTagPage from '../pages/AdminTagPage';
 
+import ItemsPage from '../pages/ItemsPage';
+import ItemAddPage from '../pages/ItemAddPage';
+
+import WebComponentPage from '../pages/WebComponentPage';
+
+
+
 
 
 function App() {
@@ -46,6 +53,12 @@ function App() {
             <Route path='/admin/tags/:slug' element={<AdminTagPage />} />
           </Route>
 
+          <Route path='/items' element={<ItemsPage />} />
+          <Route path='/items/additem' element={<ProtectedRoute />}>
+            <Route path='/items/additem' element={<ItemAddPage />} />
+          </Route>
+
+          <Route path='/webcomponent' element={<WebComponentPage />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>
