@@ -31,6 +31,7 @@ export const createTag = (values: AddTagFormValues, token: string) => async (dis
     if (data && data.error) {
         console.log(data.error);
         dispatch(changeMessage(data.error || 'Something went wrong (action)'));
+        setTimeout(() => {dispatch(changeMessage(''))}, 1000);
         return;
     }
 
@@ -57,7 +58,7 @@ export const fetchTags = () => async (dispatch: any) => {
 
     if (data && data.tags.length === 0) {
         dispatch(changeMessage('No tags found'));
-        dispatch(changeMessage(''));
+        setTimeout(() => {dispatch(changeMessage(''));}, 2000);
         return;
     }
 
