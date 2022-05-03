@@ -25,3 +25,10 @@ export type AddTagFormValues = {
     title: string;
     description: string;
 }
+
+export interface Item {
+    category: string,
+    tags: string[],
+    title: string,
+    description: string
+}

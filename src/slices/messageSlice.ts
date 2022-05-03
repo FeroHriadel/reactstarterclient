@@ -8,7 +8,7 @@ const initialState: MessageType = '';
 
 
 export const messageSlice = createSlice({
-    name: 'message',
+    name: 'message', //this shows fetchTags error. Don't use it for anything else.
     initialState,
     reducers: {
         changeMessage: (state, action: PayloadAction<MessageType>) => {

@@ -40,7 +40,7 @@ const ItemAddPage: React.FC = () => {
 
         <div className='row'>
             <div className="col-md-6 offset-md-3">
-                <ItemForm values={values} handleChange={handleChange} handleSubmit={handleSubmit} />
+                <ItemForm values={values} setValues={setValues}  handleChange={handleChange} handleSubmit={handleSubmit} />
             </div>
         </div>
     </div>

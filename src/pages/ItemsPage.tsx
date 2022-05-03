@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export interface Item {
+export interface Item { //it's in /src/models/models.ts too, here for faster reference
     category: string,
     tags: string[],
     title: string,

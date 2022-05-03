@@ -8,9 +8,10 @@ import TagsSelect from './formcomponents/TagsSelect';
 
 const ItemForm: React.FC<{
     values: Item;
+    setValues: (values: Item) => void;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void; 
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-}> = ({values, handleChange, handleSubmit}) => {
+}> = ({values, setValues, handleChange, handleSubmit}) => {
   //VALUES
   //...no values yet
 
@@ -30,7 +31,7 @@ const ItemForm: React.FC<{
 
         <div className="form-group mb-3">
           <label>Tags</label>
-          <TagsSelect />
+          <TagsSelect setValues={setValues} values={values} />
         </div>
     </Form>
   )

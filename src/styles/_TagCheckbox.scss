@@ -10,9 +10,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    word-wrap: break-word;
     margin: 0.5rem;
     cursor: pointer;
+    padding: 2px;
 
     & > * {
         text-align: center;
@@ -23,5 +23,7 @@
         padding: 0;
         transform: rotate(-30deg);
         pointer-events: none;
+        overflow-wrap: break-word;
+        width: 95%;
     }
 }

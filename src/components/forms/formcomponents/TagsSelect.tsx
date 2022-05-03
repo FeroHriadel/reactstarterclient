@@ -1,17 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TagCheckbox from './TagCheckbox';
 import { fetchTags } from '../../../actions/tagActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { wrap } from 'module';
+import { TagItem } from '../../../models/models';
 
 
 
-const TagsSelect: React.FC = () => {
+interface Item { //it's in /src/models/models.ts too, here for faster reference
+  category: string,
+  tags: string[],
+  title: string,
+  description: string
+}
+
+
+
+const TagsSelect: React.FC<{setValues: (values: Item) => void; values: Item}> = ({ setValues, values }) => {
   //VALUES
   const tags = useSelector((state: RootState) => state.tags);
-  const message = useSelector((state: RootState) => state.message);
+  const message = useSelector((state: RootState) => state.message); //this shows fetchTags error
   const dispatch = useDispatch();
+  const { tags : selectedTags } = values;
 
 
 
@@ -20,7 +30,22 @@ const TagsSelect: React.FC = () => {
     if (!tags || tags.length === 0) {
       dispatch(fetchTags());
     }
-  }, [tags])
+  }, [tags]);
+
+
+
+  //(UN)/SELECT CLICKED TAG
+  const toggleTag = (tag: TagItem) => {
+    const existingTags = [...selectedTags];
+    const clickedTagIdx = existingTags.indexOf(tag._id);
+    if (clickedTagIdx === -1) {
+      existingTags.push(tag._id);
+    } else {
+      existingTags.splice(clickedTagIdx, 1);
+    }
+
+    setValues({...values, tags: existingTags});
+  }
 
 
 
@@ -52,7 +77,7 @@ const TagsSelect: React.FC = () => {
         >
           {
             tags.map(t => (
-              <TagCheckbox key={t._id} tag={t} />
+              <TagCheckbox key={t._id} tag={t} toggleTag={toggleTag} />
             ))
           }
         </div>
