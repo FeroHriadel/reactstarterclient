@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getCategories } from '../../../slices/categoriesSlice';
 import { fetchCategories } from '../../../actions/categoryActions';
 import { RootState } from '../../../store';
+import { Item } from '../../../models/models';
 
 
 
 
-const CategoriesSelect: React.FC = () => {
+const CategoriesSelect: React.FC<{handleChange: (e: React.ChangeEvent<any>) => void, values: Item}> = ({ handleChange, values }) => {
   //VALUES
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState )=> state.categories);
@@ -51,7 +52,7 @@ const CategoriesSelect: React.FC = () => {
         {
             categories && categories.length > 0
             &&
-            <Form.Select name='category'>
+            <Form.Select name='category' onChange={handleChange} value={values.category} >
                 <option value=''>Select a Category</option>
                 {
                     categories.map(c => (

@@ -77,7 +77,7 @@ const TagsSelect: React.FC<{setValues: (values: Item) => void; values: Item}> = 
         >
           {
             tags.map(t => (
-              <TagCheckbox key={t._id} tag={t} toggleTag={toggleTag} />
+              <TagCheckbox key={t._id} tag={t} toggleTag={toggleTag} values={values}/>
             ))
           }
         </div>

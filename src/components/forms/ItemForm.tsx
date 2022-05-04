@@ -19,20 +19,44 @@ const ItemForm: React.FC<{
 
   //RENDER
   return (
-    <Form>
+    <Form onSubmit={handleSubmit} className="mb-5">
         <p className="text-muted text-center">
           <small>Fields marked * are required</small>
       </p>
 
         <div className="form-group mb-3">
           <label htmlFor="category">*Category</label>
-          <CategoriesSelect />
+          <CategoriesSelect handleChange={handleChange} values={values} />
         </div>
 
         <div className="form-group mb-3">
           <label>Tags</label>
           <TagsSelect setValues={setValues} values={values} />
         </div>
+
+        <div className="form-group mb-3">
+          <label>*Title</label>
+          <Form.Control
+            type="text"
+            name="title"
+            value={values.title}
+            onChange={handleChange}
+            placeholder="Enter Title"
+          />
+        </div>
+
+        <div className="form-group mb-3">
+          <label>Description</label>
+          <Form.Control
+            as="textarea" 
+            name="description"
+            value={values.description}
+            onChange={handleChange}
+            placeholder="Enter Description"
+          />
+        </div>
+
+        <Button type="submit" variant='primary' className="col-12">Submit</Button>
     </Form>
   )
 }

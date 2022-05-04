@@ -40,6 +40,7 @@ const ItemAddPage: React.FC = () => {
 
         <div className='row'>
             <div className="col-md-6 offset-md-3">
+                {/* TagSelect has custom checkboxes and will be using setValues rather than handleChange for that */}
                 <ItemForm values={values} setValues={setValues}  handleChange={handleChange} handleSubmit={handleSubmit} />
             </div>
         </div>
