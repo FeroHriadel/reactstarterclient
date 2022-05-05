@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Item } from '../../pages/ItemsPage';
+import { Item } from '../../models/models';
 import CategoriesSelect from './formcomponents/CategoriesSelect';
 import TagsSelect from './formcomponents/TagsSelect';
+import MultipleImageUpload from './formcomponents/MultipleImageUpload';
 
 
 
@@ -54,6 +55,11 @@ const ItemForm: React.FC<{
             onChange={handleChange}
             placeholder="Enter Description"
           />
+        </div>
+
+        <div className='form-group mb-3'>
+          <label>Images</label>
+          <MultipleImageUpload values={values} setValues={setValues} />
         </div>
 
         <Button type="submit" variant='primary' className="col-12">Submit</Button>

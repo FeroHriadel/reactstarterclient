@@ -26,9 +26,15 @@ export type AddTagFormValues = {
     description: string;
 }
 
+export type CloudinaryImage = {
+    public_id: string;
+    url: string;
+}
+
 export interface Item {
     category: string,
     tags: string[],
     title: string,
-    description: string
+    description: string,
+    images: CloudinaryImage[]
 }

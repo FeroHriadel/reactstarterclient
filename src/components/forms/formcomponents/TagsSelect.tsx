@@ -4,15 +4,8 @@ import { fetchTags } from '../../../actions/tagActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { TagItem } from '../../../models/models';
+import { Item } from '../../../models/models';
 
-
-
-interface Item { //it's in /src/models/models.ts too, here for faster reference
-  category: string,
-  tags: string[],
-  title: string,
-  description: string
-}
 
 
 

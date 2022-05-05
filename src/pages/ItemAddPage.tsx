@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ItemForm from '../components/forms/ItemForm';
-import { Item } from './ItemsPage';
+import { Item } from '../models/models';
 
 
 
@@ -11,8 +11,13 @@ const ItemAddPage: React.FC = () => {
       category: '',
       tags: [],
       title: '',
-      description: ''
+      description: '',
+      images: []
   });
+
+  useEffect(() => {
+      console.log(values.images)
+  }, [values, values.images])
 
 
 
