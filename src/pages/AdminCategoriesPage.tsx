@@ -8,6 +8,7 @@ import { RootState } from '../store';
 import { createCategory } from '../actions/categoryActions';
 import CategoriesList from '../components/lists/CategoriesList';
 import { AddCategoryFormValues } from '../models/models';
+import SingleImageUpload from '../components/forms/formcomponents/SingleFileUpload';
 
 
 
@@ -16,7 +17,7 @@ const AdminCategoriesPage = () => {
   const categories = useSelector((state: RootState )=> state.categories);
   const dispatch = useDispatch();
   const [addFormShown, setAddFormShown] = useState(false);
-  const [values, setValues] = useState({title: '', description: ''});
+  const [values, setValues] = useState({title: '', description: '', image: {public_id: '', url: ''}});
   const { title } = values;
   const [message, setMessage] = useState('');
   const { user } = useContext(UserContext);
@@ -42,8 +43,10 @@ const AdminCategoriesPage = () => {
         } else {
           setMessage('Category created');
           dispatch(addCategory(data.category));
+          setValues({title: '', description: '', image: {public_id: '', url: ''}})
           setTimeout(() => {
             setMessage(''); 
+            setAddFormShown(false);
             endOfList.current!.scrollIntoView();
           }, 750);
         }
@@ -68,7 +71,12 @@ const AdminCategoriesPage = () => {
             {
               addFormShown
               &&
-              <TitleDescriptionForm values={values} handleChange={handleChange} handleSubmit={handleSubmit} />
+              <React.Fragment>
+                <label>Image</label>
+                <SingleImageUpload values={values} setValues={setValues} />
+                <div className='mb-3'></div>
+                <TitleDescriptionForm values={values} handleChange={handleChange} handleSubmit={handleSubmit} />
+              </React.Fragment>
             } 
 
             {

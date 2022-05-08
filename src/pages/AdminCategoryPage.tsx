@@ -8,6 +8,7 @@ import { updateCategories, removeCategory } from '../slices/categoriesSlice';
 import { useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import ConfirmModal from '../components/modals/ConfirmModal';
+import SingleImageUpload from '../components/forms/formcomponents/SingleFileUpload';
 
 
 
@@ -17,8 +18,16 @@ const CategoryPage = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const [formShown, setFormShown] = useState(true);
-  const [values, setValues] = useState({title: '', description: '', _id: '', slug: '', createdAt: '', updatedAt: ''});
-  const { title, description, _id } = values;
+  const [values, setValues] = useState({
+    title: '', 
+    description: '',
+    image: {public_id: '', url: ''},
+    _id: '', 
+    slug: '', 
+    createdAt: '', 
+    updatedAt: ''
+  });
+  const { title, description, image, _id } = values;
   const [message, setMessage] = useState('Getting category details...');
   const { user } = useContext(UserContext);
   const [modalShown, setModalShown] = useState(false);
@@ -58,7 +67,7 @@ const CategoryPage = () => {
     
     setFormShown(false);
     setMessage('Updating category...');
-    updateCategory(title, description, _id, user!.token!)
+    updateCategory(title, description, image, _id, user!.token!)
       .then(data => {
         if (data && data.error) {
           setMessage(data.error);
@@ -110,6 +119,9 @@ const CategoryPage = () => {
         &&
         <div className='row'>
           <div className='col-md-6 offset-md-3'>
+            <label>Image</label>
+            <SingleImageUpload values={values} setValues={setValues} />
+            <div className='mb-3'></div>
             <TitleDescriptionForm values={{title, description}} handleChange={handleChange} handleSubmit={handleSubmit} />
           </div>
         </div>

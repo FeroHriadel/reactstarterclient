@@ -57,8 +57,38 @@ const CategoriesList = () => {
                   style={{cursor: 'pointer'}}
                   onClick={() => navigate(`/admin/categories/${category.slug}`)}
                 >
-                  <div className='d-flex w-100 justify-content-between'>
-                    <p style={{margin: 0, padding: 0}}>{category.title}</p>
+                  <div className='d-flex w-100 justify-content-between align-items-center'>
+                    <div className='d-flex align-items-center'>
+                      {
+                        category && category.image && category.image.url
+                        ?
+                        <div
+                          className='category-image'
+                          style={{
+                            width: '50px',
+                            height: '50px',
+                            borderRadius: '50%',
+                            background: `url(${category.image.url}) no-repeat center center/cover`,
+                            margin: '0.25rem'
+                          }}
+                        />
+                        :
+                        <p style={{
+                          transform: 'rotate(-45deg)',
+                          margin: '0.25rem',
+                          padding: '0',
+                          lineHeight: '50px',
+                          borderRadius: '50%',
+                          border: '1px #666 solid',
+                          minWidth: '50px',
+                          fontSize: '0.5rem',
+                          wordWrap: 'break-word',
+                          textAlign: 'center'
+                        }}
+                        >No image</p>
+                      }
+                      <p style={{margin: 0, padding: 0}}>{category.title}</p>
+                    </div>
                     <FaEdit />
                   </div>
                 </ListGroup.Item>

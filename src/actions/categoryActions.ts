@@ -1,4 +1,5 @@
 import { AddCategoryFormValues } from '../models/models';
+import { ImageType } from '../models/models';
 
 
 
@@ -48,7 +49,7 @@ export const getCategoryBySlug = (slug: string) => {
 
 
 
-export const updateCategory = (title: string, description: string, _id: string, token: string) => {
+export const updateCategory = (title: string, description: string, image: ImageType, _id: string,  token: string) => {
     return fetch(`${process.env.REACT_APP_API}/categories/updatecategory`, {
         method: 'PUT',
         headers: {

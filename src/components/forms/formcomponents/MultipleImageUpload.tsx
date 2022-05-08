@@ -2,7 +2,8 @@ import React, { useState, useContext } from 'react';
 import { UserContext } from '../../../context/userContext';
 import { Form, Spinner } from 'react-bootstrap';
 import Resizer from 'react-image-file-resizer'; 
-import axios from 'axios';
+import axios from 'axios'; //axios is here so you don't have to mess around with FormData to send a file => axios does it for you
+import { FaTimes } from 'react-icons/fa';
 
 
 
@@ -72,58 +73,123 @@ const MultipleImageUpload: React.FC<{ values: any, setValues: (newValues: any) =
 
 
 
+    //REMOVE IMAGE METHOD
+    const removeImage = (public_id: string) => {
+        setLoading(true);
+        fetch(`${process.env.REACT_APP_API}/images/removeimage`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user!.token}`
+            },
+            method: 'POST',
+            body: JSON.stringify({public_id})
+        })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.error) {
+                    setLoading(false);
+                    setError(`Image removal failed: ${data.error}`);
+                    setTimeout(() => {setError('')}, 2000);
+                } else {
+                    let imagesArr = [...values.images];
+                    imagesArr = imagesArr.filter(img => img.public_id !== public_id);
+                    setValues({...values, images: imagesArr});
+                    setLoading(false);
+                    setError('Image Removed');
+                    setTimeout(() => {setError('')}, 1500);
+                }
+            })
+    }
+
+
+
     //RENDER
     return(
         <React.Fragment>
-            {loading && <Spinner animation='border' className='mb-2' />}
+            {loading && <div><Spinner animation='border' className='mb-2' /></div>}
 
             {
-                !loading && values.images.length > 0
+                !loading
                 &&
                 <div 
                     className='img-preview-wrapper'
                     style={{
+                        width: '100%',
                         display: 'flex',
                         flexWrap: 'wrap'
-                    }}
+                    }}    
                 >
                     {
-                        values.images.map((img: {public_id: string, url: string}) => {
+                        values.images.map((img: {public_id: string, url: string}) => (
                             <div 
-                              className='img-preview' 
-                              key={img.public_id}
-                              style={{
-                                  background: `url(${img.url}) no-repeat center center/cover`,
-                                  width: '50px',
-                                  height: '50px',
-                                  borderRadius: '50%',
-                                  margin: '0.25rem',
-                                  position: 'relative'
-                              }}
+                                key={img.public_id}
+                                className='img-preview'
+                                style={{
+                                    width: '50px',
+                                    height: '50px',
+                                    borderRadius: '50px',
+                                    background: `url(${img.url}) no-repeat center center/cover`,
+                                    position: 'relative',
+                                    margin: '0.25rem'
+                                }}
                             >
-                                <p
+                                <div
+                                    className='remove-img-btn'
+                                    onClick={() => removeImage(img.public_id)}
                                     style={{
+                                        width: '15px',
+                                        height: '15px',
+                                        borderRadius: '50%',
+                                        background: '#333',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
                                         position: 'absolute',
-                                        top: '0',
-                                        right: '0',
-                                        fontSize: '0.5rem'
+                                        top: 0,
+                                        right: 0,
+                                        cursor: 'pointer'
                                     }}
-                                    onClick={() => console.log('delete image')}
                                 >
-                                    x
-                                </p>
+                                    <p style={{color: 'white', pointerEvents: 'none', fontSize: '0.75rem', margin: 0, padding: 0, lineHeight: '1'}}>
+                                        <FaTimes />
+                                    </p>
+                                </div>
                             </div>
-                        })
+                        ))
                     }
                 </div>
             }
 
+            <div className='label-wrapper'>
+            <Form.Label htmlFor='images' style={{
+                height: 48,
+                background: '#1a1a1a',
+                display: 'flext',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                cursor: 'pointer',
+                lineHeight: '48px',
+                textAlign: 'center',
+                color: 'white',
+                textTransform: 'uppercase',
+                fontSize: '0.9rem'
+            }}>
+                Upload Images
+            </Form.Label>
+            </div>
             <Form.Control
-                type="file"
-                multiple
-                accept="images/*"
-                onChange={resizeAndUpload}
-            />
+                    type="file"
+                    multiple
+                    accept="images/*"
+                    onChange={resizeAndUpload}
+                    name='images'
+                    id='images'
+                    hidden
+                />
 
             {error && <p className='text-center'>{error}</p>}
         </React.Fragment>

@@ -1,8 +1,14 @@
+export type ImageType = {
+    public_id: string;
+    url: string;
+}
+
 export type CategoryItem = {
     title: string;
     slug: string;
     description: string;
     _id: string;
+    image?: ImageType;
     createdAt: string;
     updatedAt: string;
 }
